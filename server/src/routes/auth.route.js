@@ -7,7 +7,7 @@ const auth = require('../controller/auth.controller')
 router.post('/authenticate', auth.authenticate);
 
 /* generate password. */
-router.post('/generatePassword',auth.generatePassword)
+router.post('/register',auth.generatePassword)
 
 
 module.exports = router;

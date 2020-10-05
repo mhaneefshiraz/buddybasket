@@ -7,6 +7,7 @@ exports.verifyToken = (req, res, next) => {
     console.log(req.headers['authorization'])
     try {
         let token = req.headers['x-access-token'] || req.headers['authorization']; // Express headers are auto converted to lowercase
+        console.log(token)
         if (token.startsWith('Bearer ')) {
             // Remove Bearer from string
             token = token.slice(7, token.length);

@@ -2,87 +2,37 @@ var express = require('express');
 var router = express.Router();
 var dashboard = require('../controller/dashboard.controller')
 var checkToken = require('../helper/verifyToken')
- 
-/* GET users listing. */
-router.post('/contentSearch',checkToken.verifyToken, dashboard.contantSearch);
+var multer = require('multer');
+var path = require('path');
 
-/* contant meta search */
-router.post('/contantMetaSearch',checkToken.verifyToken, dashboard.contantMetaSearch);
+var storage = multer.diskStorage({
+  // destination
+  destination: function (req, file, cb) {
+    cb(null, './uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+console.log(storage)
+var upload = multer({ storage: storage });
 
-/* get Frame Id */
-router.post('/getFrameId',checkToken.verifyToken, dashboard.getFrameId);
+/* insert image */ 
+router.post("/upload", upload.array("uploads[]", 12), function (req, res) {
+    console.log('files', req.files);
+    res.send(req.files);
+  })
 
-/* get count object */
-router.post('/getobjectcount',checkToken.verifyToken, dashboard.getobjectcount);
+/* insert restaurant. */
+router.post('/restaurant',checkToken.verifyToken, dashboard.insertrestaurant);
 
-/* get region name*/
-router.get('/getreginname',checkToken.verifyToken,dashboard.getreginname);
+/* insert location. */
+router.post('/location',checkToken.verifyToken, dashboard.insertlocation);
 
-/* get mission plan*/
-router.get('/getmissionplan',checkToken.verifyToken,dashboard.getmissionplan);
+/* get location. */
+router.get('/getloc',checkToken.verifyToken, dashboard.getloc);
 
-/* update salute report */
-router.post('/updatesalutereport',checkToken.verifyToken, dashboard.updatesalutereport);
-
-/* get salute report */
-router.get('/getsalutereport',checkToken.verifyToken, dashboard.getsalutereport);
-
-/* get  report */
-router.post('/getreport',checkToken.verifyToken, dashboard.getreport);
-
-// update report
-router.post('/updatereport',checkToken.verifyToken, dashboard.updatereport);
-
-/* get  kml */
-router.post('/getkml',checkToken.verifyToken, dashboard.getkmlData);
-
-/* get  kml */
-router.post('/addreport',checkToken.verifyToken, dashboard.addreport);
-
-/* get  reporthistory */
-router.post('/reporthistory',checkToken.verifyToken, dashboard.reporthistory);
-
-/* get count reporthistory */
-router.post('/countreporthistory',checkToken.verifyToken, dashboard.countreporthistory);
-
-/* get  users */
-router.get('/getusers',checkToken.verifyToken, dashboard.users);
-
-/*   insert live video */
-router.post('/postlivevideo',checkToken.verifyToken, dashboard.livevideo);
-
-/* get  insertlive video */
-router.post('/getlivevideo',checkToken.verifyToken, dashboard.getlivevideo);
-
-/* get  unassign video */
-router.post('/getunassignvideo',checkToken.verifyToken, dashboard.unassignvideo);
-
-/* get  delassign video */
-router.post('/delassign',checkToken.verifyToken, dashboard.delassign);
-
-/* get  kml data */
-router.get('/getkmldata',checkToken.verifyToken, dashboard.getkmldata);
-
-/* reject report */
-router.post('/rejectreport',checkToken.verifyToken, dashboard.rejectreport);
-
-/*sqlinjection*/
-
-router.post('/sqlinjection', dashboard.sqlinjection);
-
-/* connect python */
-// router.post('/connectpy',checkToken.verifyToken, dashboard.connectpy);
-
-/* getsummary */
- router.post('/getsummary',checkToken.verifyToken, dashboard.getsummary);
-
- /* post Analyst’s Comments */
- router.post('/getcomments',checkToken.verifyToken, dashboard.getcomments);
-
- router.get('/approveRequest',checkToken.verifyToken,dashboard.approveRequest);
-
- router.post('/adminapproval',checkToken.verifyToken,dashboard.adminapproval);
-
- router.get('/logout',checkToken.verifyToken,dashboard.logout)
+/*get restaurnat */
+router.get('/getrestaurant',checkToken.verifyToken, dashboard.getrestaurant);
 
 module.exports = router;

@@ -7,7 +7,7 @@ var dbSetting = require('./src/config/env.config')
 var env=require('./src/config/env.config')
 
 var auth = require('./src/routes/auth.route');
-// var dashboard = require('./src/routes/dashboard.route');
+var dashboard = require('./src/routes/dashboard.route');
 
 var app = express();
 
@@ -37,7 +37,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../fontend/client')));
 
 app.use('/apiV1/auth', auth);
-// app.use('/apiV1/dashboard', dashboard);
+app.use('/apiV1/dashboard', dashboard);
 
 app.use('*',(req,res)=>{
   console.log(path.join(__dirname, '../fontend/client/index.html'))
