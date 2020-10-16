@@ -34,14 +34,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../fontend/client')));
-
+app.use(express.static(path.join(__dirname, '/client')));
+console.log(path.join(__dirname, '/client'))
 app.use('/apiV1/auth', auth);
 app.use('/apiV1/dashboard', dashboard);
 
 app.use('*',(req,res)=>{
-  console.log(path.join(__dirname, '../fontend/client/index.html'))
-  return res.sendFile(path.join(__dirname, '../fontend/client/index.html'))
+  console.log(path.join(__dirname, '/client/index.html'))
+  return res.sendFile(path.join(__dirname, '/client/index.html'))
 
 })
 
