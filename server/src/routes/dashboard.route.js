@@ -35,4 +35,11 @@ router.get('/getloc',checkToken.verifyToken, dashboard.getloc);
 /*get restaurnat */
 router.get('/getrestaurant',checkToken.verifyToken, dashboard.getrestaurant);
 
+/*get category */
+router.get('/getcategory',checkToken.verifyToken, dashboard.category);
+
+/*insert category */
+router.post('/insertcategory',checkToken.verifyToken, dashboard.insertcat);
+
+
 module.exports = router;

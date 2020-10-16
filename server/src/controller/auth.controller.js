@@ -68,9 +68,11 @@ exports.generatePassword = function (req, res) {
 
         db.query(userquery,[username,email,phone,password1],function (err,result){
             if(err){
-                res.send(new Response.ErrorResponse("Internal server error",err))
+                res.send(new Response.ErrorResponse('Internal server error',err))
+                
             }
-            res.status(200).json({'res':result})
+            res.send(new Response.SuccessResponse(result, 'User login Successfull'));
+       
         });
     });
 }

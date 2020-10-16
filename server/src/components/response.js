@@ -7,7 +7,7 @@
  */
 function SuccessResponse(data, message) {
     this.message = message || 'Success';
-    this.status = 200;
+    this.status = true;
     this.data = data;
 }
 
@@ -20,7 +20,7 @@ function SuccessResponse(data, message) {
  */
 function ErrorResponse(message, internalError) {
     this.message = message || 'Unknown error.';
-    this.status = 503;
+    this.status = false;
     this.data = '';
     this.internalError = internalError || null;
 }
